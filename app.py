@@ -10,13 +10,15 @@ if not os.path.exists("similarity.pkl"):
     file_id = "1o1bGuJJO9qUZoV_498_O49umSpG2E28d"
     url = f"https://drive.google.com/uc?id={file_id}"
     gdown.download(url, "similarity.pkl", quiet=False)
+
 # ----------------- Streamlit Setup -----------------
 st.set_page_config(page_title="Movie Recommender", layout="wide")
 
 # ----------------- Helper Functions -----------------
 
 def fetch_poster(movie_id):
-    url = f'https://api.themoviedb.org/3/movie/{movie_id}?api_key=041444c9426917abe3524991e44e0ed6'
+    api_key = st.secrets["TMDB_API_KEY"]
+    url = f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}'
     response = requests.get(url)
     data = response.json()
     return "https://image.tmdb.org/t/p/original/" + data['poster_path']
