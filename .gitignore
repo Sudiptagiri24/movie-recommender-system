@@ -1,2 +1,4 @@
 similarity.pkl
 .idea/
+.streamlit/secrets.toml
+
